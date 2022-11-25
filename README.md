@@ -3,7 +3,7 @@ Python wrapper for flexfringe
 
 ## Installation
 ```
-pip install git+https://github.com/tudelft-cda-lab/FlexFringe-python.git
+pip install git+https://github.com/ClintonCao/FlexFringe-python.git
 ```
 
 Also be sure to [download flexfringe itself](https://github.com/tudelft-cda-lab/FlexFringe/releases/tag/latest).
