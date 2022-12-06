@@ -125,27 +125,7 @@ class FlexFringe:
             df_out = self.predict(file.name, **kwargs)
             os.remove(file.name)
             return df_out
-    
-    # @dispatch(DataFrame, str)
-    # def predict(self, df: DataFrame, apta_file: str, **kwargs):
-    #     """
-    #     Convenience method for predict which takes a pandas dataframe
-
-    #     :param df: The pandas dataframe to write to csv and pass to flexfringe
-    #     :param apta_file: The path to the apta file to use
-    #     :param kwargs: other parameters to be passed to flexfringe
-    #     :return: A dataframe with the output from flexfringe
-    #     """
-    #     with NamedTemporaryFile("w", suffix=".csv", delete=False) as file:
-    #         df.to_csv(file)
-    #         file.close()
-    #         print(file.name)
-    #         print(Path(f"{self.tracefile}").exists())
-    #         print(Path(f"{self.tracefile}").is_file())
-    #         df_out = self.predict(file.name, apta_file, **kwargs)
-    #         os.remove(file.name)
-    #         return df_out
-
+    g
     @dispatch(object)
     def predict(self, tracefile, **kwargs):
         """
