@@ -125,7 +125,7 @@ class FlexFringe:
             df_out = self.predict(file.name, **kwargs)
             os.remove(file.name)
             return df_out
-    g
+    
     @dispatch(object)
     def predict(self, tracefile, **kwargs):
         """
@@ -170,7 +170,7 @@ class FlexFringe:
         return self._parse_flexfringe_result()
 
     def _parse_flexfringe_result(self):
-        df = pd.read_csv(self.result_out, delimiter=";", index_col="row nr")
+        df = pd.read_csv(self.result_out, delimiter=";")
         df.columns = [column.strip() for column in df.columns]
 
         # Parse abbadingo traces
@@ -188,9 +188,9 @@ class FlexFringe:
             abd_trc.append(parts[2:])
 
         df = df.drop(columns=["abbadingo trace"])
-        df.insert(0, "abbadingo type", abd_type)
-        df.insert(1, "abbadingo length", abd_len)
-        df.insert(2, "abbadingo trace", abd_trc)
+        df.insert(1, "abbadingo type", abd_type)
+        df.insert(2, "abbadingo length", abd_len)
+        df.insert(3, "abbadingo trace", abd_trc)
 
         # Parse state sequences
         df['state sequence'] = df['state sequence'] \
