@@ -51,7 +51,7 @@ class FlexFringe:
 
     @property
     def result_out(self) -> Path:
-        return self._get_out_file(".ff.final.json.result")
+        return self._get_out_file(".ff.final.json.result.csv")
 
     def _get_out_file(self, extension: str) -> Path:
         if self.tracefile is None:
