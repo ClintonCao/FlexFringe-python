@@ -134,10 +134,11 @@ class FlexFringe:
         self.tracefile = tracefile
 
         output_type = output_file.split('.')[-1]
+        model = output_type + '.final.' + output_type
 
         try:
-            with output_file + '.final.' + output_type as fh:
-                dot_content = fh.read()
+            with open(model, 'r') as fh:
+                _ = fh.read()
         except FileNotFoundError as e:
             raise RuntimeError(f"Error running FlexFringe: no output file found: {e.filename}")
 
