@@ -110,7 +110,7 @@ class FlexFringe:
             raise RuntimeError(f"Error running FlexFringe: no output file found: {e.filename}")
         
     @dispatch(object, namespace=namespace)
-    def fit(self, tracefile, output_file = None, **kwargs):
+    def fit(self, tracefile, output_file=None, output_format=None, **kwargs):
         """
         Hacky function for learning a model from the tracefile and saving the model
         with a different name.
@@ -133,9 +133,8 @@ class FlexFringe:
 
         self.tracefile = tracefile
 
-        output_type = output_file.split('.')[-1]
-        model = output_type + '.final.' + output_type
-
+        model = output_file + '.final.' + output_format
+        
         try:
             with open(model, 'r') as fh:
                 _ = fh.read()
