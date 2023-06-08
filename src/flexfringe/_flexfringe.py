@@ -108,6 +108,38 @@ class FlexFringe:
                 json_content = fh.read()
         except FileNotFoundError as e:
             raise RuntimeError(f"Error running FlexFringe: no output file found: {e.filename}")
+        
+    @dispatch(object, namespace=namespace)
+    def fit(self, tracefile, output_file = None, **kwargs):
+        """
+        Hacky function for learning a model from the tracefile and saving the model
+        with a different name.
+
+        kwargs are passed through to flexfringe in the form of --key=value
+
+        :param tracefile: Path to the trace file to load. Can be either in abbadingo or csv format
+        :param output_file: Path to where the model is saved
+        :param kwargs: other parameters to be passed to flexfringe
+        """
+        # Use the kwargs passed to this function as overrides for the ones specified in the constructor
+        all_kwargs = dict(self.kwargs)
+        for k, v in kwargs.items():
+            all_kwargs[k] = v
+        flags = self._format_kwargs(**all_kwargs)
+
+        command = [tracefile] + flags
+
+        self._run(command)
+
+        self.tracefile = tracefile
+
+        output_type = output_file.split('.')[-1]
+
+        try:
+            with output_file + '.final.' + output_type as fh:
+                dot_content = fh.read()
+        except FileNotFoundError as e:
+            raise RuntimeError(f"Error running FlexFringe: no output file found: {e.filename}")
 
 
     @dispatch(DataFrame)
